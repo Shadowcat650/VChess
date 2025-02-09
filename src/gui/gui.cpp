@@ -155,18 +155,18 @@ void loop(std::string fen) {
     sf::Texture blackKingTexture;
 
 
-    whitePawnTexture.loadFromFile("../src/gui/assets/white_pawn.png");
-    blackPawnTexture.loadFromFile("../src/gui/assets/black_pawn.png");
-    whiteKnightTexture.loadFromFile("../src/gui/assets/white_knight.png");
-    blackKnightTexture.loadFromFile("../src/gui/assets/black_knight.png");
-    whiteRookTexture.loadFromFile("../src/gui/assets/white_rook.png");
-    blackRookTexture.loadFromFile("../src/gui/assets/black_rook.png");
-    whiteBishopTexture.loadFromFile("../src/gui/assets/white_bishop.png");
-    blackBishopTexture.loadFromFile("../src/gui/assets/black_bishop.png");
-    whiteQueenTexture.loadFromFile("../src/gui/assets/white_queen.png");
-    blackQueenTexture.loadFromFile("../src/gui/assets/black_queen.png");
-    whiteKingTexture.loadFromFile("../src/gui/assets/white_king.png");
-    blackKingTexture.loadFromFile("../src/gui/assets/black_king.png");
+    whitePawnTexture.loadFromFile("src/gui/assets/white_pawn.png");
+    blackPawnTexture.loadFromFile("src/gui/assets/black_pawn.png");
+    whiteKnightTexture.loadFromFile("src/gui/assets/white_knight.png");
+    blackKnightTexture.loadFromFile("src/gui/assets/black_knight.png");
+    whiteRookTexture.loadFromFile("src/gui/assets/white_rook.png");
+    blackRookTexture.loadFromFile("src/gui/assets/black_rook.png");
+    whiteBishopTexture.loadFromFile("src/gui/assets/white_bishop.png");
+    blackBishopTexture.loadFromFile("src/gui/assets/black_bishop.png");
+    whiteQueenTexture.loadFromFile("src/gui/assets/white_queen.png");
+    blackQueenTexture.loadFromFile("src/gui/assets/black_queen.png");
+    whiteKingTexture.loadFromFile("src/gui/assets/white_king.png");
+    blackKingTexture.loadFromFile("src/gui/assets/black_king.png");
 
 
     sf::Sprite whitePawn(whitePawnTexture);

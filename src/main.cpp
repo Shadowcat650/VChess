@@ -1,5 +1,5 @@
-#include "src/gui/gui.h"
-#include "src/precompute.h"
+#include "gui/gui.h"
+#include "precompute.h"
 #include <sstream>
 
 int main() {
