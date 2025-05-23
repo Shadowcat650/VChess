@@ -47,7 +47,7 @@ bool openingMode = false;
 void loop(std::string fen) {
 
     // Create Window
-    sf::RenderWindow window(sf::VideoMode(1200, 800), "Velocity Chess");
+    sf::RenderWindow window(sf::VideoMode({1200, 800}), "Velocity Chess");
     window.setFramerateLimit(10);
 
     // Create the black and white tiles for the chess board
@@ -66,76 +66,76 @@ void loop(std::string fen) {
 
     // load text font
     sf::Font font;
-    if (!font.loadFromFile("/Library/Fonts/Arial Unicode.ttf")) {
+    if (!font.openFromFile("/Library/Fonts/Arial Unicode.ttf")) {
         cout << "Error loading text font" << endl;
     }
 
     // Create header
     sf::RectangleShape header(sf::Vector2f(400, 100));
     header.setFillColor(sf::Color (110, 112, 112, 255));
-    header.setPosition(800, 0);
+    header.setPosition({800, 0});
 
-    sf::Text headerText("Velocity Chess Engine v.0", font, 30);
+    sf::Text headerText(font, "Velocity Chess Engine v.0", 30);
     headerText.setFillColor(sf::Color::Black);
     headerText.setStyle(sf::Text::Bold);
     sf::FloatRect textBounds = headerText.getLocalBounds();
-    headerText.setOrigin(textBounds.left + textBounds.width / 2.0f,
-                         textBounds.top + textBounds.height / 2.0f);
+    headerText.setOrigin({textBounds.position.x + textBounds.size.x / 2.0f,
+                         textBounds.position.y + textBounds.size.y / 2.0f});
     headerText.setPosition(header.getPosition() + header.getSize() / 2.0f);
 
     // Create Restart Button
     sf::RectangleShape restart(sf::Vector2f(400, 100));
     restart.setFillColor(sf::Color (90, 92, 92, 255));
-    restart.setPosition(800, 100);
+    restart.setPosition({800, 100});
 
-    sf::Text restartText("Restart", font, 30);
+    sf::Text restartText(font, "Restart", 30);
     restartText.setFillColor(sf::Color::Black);
     restartText.setStyle(sf::Text::Bold);
     textBounds = restartText.getLocalBounds();
-    restartText.setOrigin(textBounds.left + textBounds.width / 2.0f,
-                         textBounds.top + textBounds.height / 2.0f);
+    restartText.setOrigin({textBounds.position.x + textBounds.size.x / 2.0f,
+                         textBounds.position.y + textBounds.size.y / 2.0f});
     restartText.setPosition(restart.getPosition() + restart.getSize() / 2.0f);
 
     // Create loadLastFen Button
     sf::RectangleShape loadLast(sf::Vector2f(400, 100));
     loadLast.setFillColor(sf::Color (110, 112, 112, 255));
-    loadLast.setPosition(800, 200);
+    loadLast.setPosition({800, 200});
 
-    sf::Text loadLastText("Undo Move", font, 30);
+    sf::Text loadLastText(font, "Undo Move", 30);
     loadLastText.setFillColor(sf::Color::Black);
     loadLastText.setStyle(sf::Text::Bold);
     textBounds = loadLastText.getLocalBounds();
-    loadLastText.setOrigin(textBounds.left + textBounds.width / 2.0f,
-                          textBounds.top + textBounds.height / 2.0f);
+    loadLastText.setOrigin({textBounds.position.x + textBounds.size.x / 2.0f,
+                          textBounds.position.y + textBounds.size.y / 2.0f});
     loadLastText.setPosition(loadLast.getPosition() + loadLast.getSize() / 2.0f);
 
     // Create game over pop ups
     sf::RectangleShape gameOver(sf::Vector2f(250, 100));
     gameOver.setFillColor(sf::Color (90, 92, 92, 255));
-    gameOver.setPosition(275, 350);
+    gameOver.setPosition({275, 350});
 
-    sf::Text gameOverTextWhite("White wins!", font, 30);
+    sf::Text gameOverTextWhite(font, "White wins!", 30);
     gameOverTextWhite.setFillColor(sf::Color::Black);
     gameOverTextWhite.setStyle(sf::Text::Bold);
     textBounds = gameOverTextWhite.getLocalBounds();
-    gameOverTextWhite.setOrigin(textBounds.left + textBounds.width / 2.0f,
-                          textBounds.top + textBounds.height / 2.0f);
+    gameOverTextWhite.setOrigin({textBounds.position.x + textBounds.size.x / 2.0f,
+                          textBounds.position.y + textBounds.size.y / 2.0f});
     gameOverTextWhite.setPosition(gameOver.getPosition() + gameOver.getSize() / 2.0f);
 
-    sf::Text gameOverTextBlack("Black wins!", font, 30);
+    sf::Text gameOverTextBlack(font, "Black wins!", 30);
     gameOverTextBlack.setFillColor(sf::Color::Black);
     gameOverTextBlack.setStyle(sf::Text::Bold);
     textBounds = gameOverTextBlack.getLocalBounds();
-    gameOverTextBlack.setOrigin(textBounds.left + textBounds.width / 2.0f,
-                           textBounds.top + textBounds.height / 2.0f);
+    gameOverTextBlack.setOrigin({textBounds.position.x + textBounds.size.x / 2.0f,
+                           textBounds.position.y + textBounds.size.y / 2.0f});
     gameOverTextBlack.setPosition(gameOver.getPosition() + gameOver.getSize() / 2.0f);
 
-    sf::Text gameOverTextDraw("It's a draw!", font, 30);
+    sf::Text gameOverTextDraw(font, "It's a draw!", 30);
     gameOverTextDraw.setFillColor(sf::Color::Black);
     gameOverTextDraw.setStyle(sf::Text::Bold);
     textBounds = gameOverTextDraw.getLocalBounds();
-    gameOverTextDraw.setOrigin(textBounds.left + textBounds.width / 2.0f,
-                           textBounds.top + textBounds.height / 2.0f);
+    gameOverTextDraw.setOrigin({textBounds.position.x + textBounds.size.x / 2.0f,
+                           textBounds.position.y + textBounds.size.y / 2.0f});
     gameOverTextDraw.setPosition(gameOver.getPosition() + gameOver.getSize() / 2.0f);
 
 
@@ -183,32 +183,32 @@ void loop(std::string fen) {
     sf::Sprite blackKing(blackKingTexture);
 
 
-    whitePawn.setTextureRect(sf::IntRect(0, 0, 13, 16));
-    blackPawn.setTextureRect(sf::IntRect(0, 0, 13, 16));
-    whiteKnight.setTextureRect(sf::IntRect(0, 0, 16, 18));
-    blackKnight.setTextureRect(sf::IntRect(0, 0, 16, 18));
-    whiteRook.setTextureRect(sf::IntRect(0, 0, 14, 18));
-    blackRook.setTextureRect(sf::IntRect(0, 0, 14, 18));
-    whiteBishop.setTextureRect(sf::IntRect(0, 0, 18, 19));
-    blackBishop.setTextureRect(sf::IntRect(0, 0, 18, 19));
-    whiteQueen.setTextureRect(sf::IntRect(0, 0, 18, 18));
-    blackQueen.setTextureRect(sf::IntRect(0, 0, 18, 18));
-    whiteKing.setTextureRect(sf::IntRect(0, 0, 20, 20));
-    blackKing.setTextureRect(sf::IntRect(0, 0, 20, 20));
+    whitePawn.setTextureRect(sf::IntRect({0, 0}, {13, 16}));
+    blackPawn.setTextureRect(sf::IntRect({0, 0}, {13, 16}));
+    whiteKnight.setTextureRect(sf::IntRect({0, 0}, {16, 18}));
+    blackKnight.setTextureRect(sf::IntRect({0, 0}, {16, 18}));
+    whiteRook.setTextureRect(sf::IntRect({0, 0}, {14, 18}));
+    blackRook.setTextureRect(sf::IntRect({0, 0}, {14, 18}));
+    whiteBishop.setTextureRect(sf::IntRect({0, 0}, {18, 19}));
+    blackBishop.setTextureRect(sf::IntRect({0, 0}, {18, 19}));
+    whiteQueen.setTextureRect(sf::IntRect({0, 0}, {18, 18}));
+    blackQueen.setTextureRect(sf::IntRect({0, 0}, {18, 18}));
+    whiteKing.setTextureRect(sf::IntRect({0, 0}, {20, 20}));
+    blackKing.setTextureRect(sf::IntRect({0, 0}, {20, 20}));
 
 
-    whitePawn.setScale(4.5f, 4.5f);
-    blackPawn.setScale(4.5f, 4.5f);
-    whiteKnight.setScale(4.5f, 4.5f);
-    blackKnight.setScale(4.5f, 4.5f);
-    whiteRook.setScale(4.5f, 4.5f);
-    blackRook.setScale(4.5f, 4.5f);
-    whiteBishop.setScale(4.5f, 4.5f);
-    blackBishop.setScale(4.5f, 4.5f);
-    whiteQueen.setScale(4.5f, 4.5f);
-    blackQueen.setScale(4.5f, 4.5f);
-    whiteKing.setScale(4.5f, 4.5f);
-    blackKing.setScale(4.5f, 4.5f);
+    whitePawn.setScale({4.5f, 4.5f});
+    blackPawn.setScale({4.5f, 4.5f});
+    whiteKnight.setScale({4.5f, 4.5f});
+    blackKnight.setScale({4.5f, 4.5f});
+    whiteRook.setScale({4.5f, 4.5f});
+    blackRook.setScale({4.5f, 4.5f});
+    whiteBishop.setScale({4.5f, 4.5f});
+    blackBishop.setScale({4.5f, 4.5f});
+    whiteQueen.setScale({4.5f, 4.5f});
+    blackQueen.setScale({4.5f, 4.5f});
+    whiteKing.setScale({4.5f, 4.5f});
+    blackKing.setScale({4.5f, 4.5f});
 
     if (fen != "startpos") {
         Game.loadPosition(fen);
@@ -230,25 +230,24 @@ void loop(std::string fen) {
 //        if (window.getSize().x != 800 || window.getSize().y) {
 //            window.setSize({800, 800});
 //        }
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+        while (const std::optional event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>()) {
                 window.close();
             }
-            if (event.type == sf::Event::KeyPressed) {
-                if (event.key.code == sf::Keyboard::Q) {
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                if (keyPressed->scancode == sf::Keyboard::Scancode::Q) {
                     promoteTo = PIECE::QUEEN;
-                } else if (event.key.code == sf::Keyboard::R) {
+                } else if (keyPressed->scancode == sf::Keyboard::Scancode::R)  {
                     promoteTo = PIECE::ROOK;
-                } else if (event.key.code == sf::Keyboard::K || event.key.code == sf::Keyboard::N) {
+                } else if (keyPressed->scancode == sf::Keyboard::Scancode::K || keyPressed->scancode == sf::Keyboard::Scancode::N) {
                     promoteTo = PIECE::KNIGHT;
-                } else if (event.key.code == sf::Keyboard::B) {
+                } else if (keyPressed->scancode == sf::Keyboard::Scancode::B) {
                     promoteTo = PIECE::BISHOP;
                 }
             }
-            if (event.type == sf::Event::MouseButtonPressed)
+            if (const auto* mouseEvent = event->getIf<sf::Event::MouseButtonPressed>())
             {
-                if (event.mouseButton.button == sf::Mouse::Left)
+                if (mouseEvent->button == sf::Mouse::Button::Left)
                 {
                     sf::Vector2i clickPosition = sf::Mouse::getPosition(window);
                     U8 objectClicked = objectTracker.getObjectClicked({clickPosition.x, clickPosition.y});
@@ -432,10 +431,10 @@ void loop(std::string fen) {
             for (int j = 0; j < 8; j++) {
                 // Render Squares
                 if (squareIsWhite((j +(i * 8)))) {
-                    whiteTile.setPosition(j * 100, (7 - i) * 100);
+                    whiteTile.setPosition({static_cast<float>(j * 100), static_cast<float>((7 - i) * 100)});
                     window.draw(whiteTile);
                 } else {
-                    blackTile.setPosition(j * 100, (7 - i) * 100);
+                    blackTile.setPosition({static_cast<float>(j * 100), static_cast<float>((7 - i) * 100)});
                     window.draw(blackTile);
                 }
 
@@ -445,59 +444,59 @@ void loop(std::string fen) {
 
                 // Render Pieces
                 if ((Game.Board.WhitePawns & (LOCATION::ZERO >> (j +(i * 8)))) != 0) {
-                    whitePawn.setPosition((j * 100) + 20.75, ((7 - i) * 100) + 14);
+                    whitePawn.setPosition({static_cast<float>(j * 100 + 20.75), static_cast<float>((7 - i) * 100 + 14)});
                     window.draw(whitePawn);
                 } else if ((Game.Board.BlackPawns & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    blackPawn.setPosition((j * 100) + 20.75, ((7 - i) * 100) + 14);
+                    blackPawn.setPosition({static_cast<float>(j * 100 + 20.75), static_cast<float>((7 - i) * 100 + 14)});
                     window.draw(blackPawn);
                 } else if ((Game.Board.WhiteKnights & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    whiteKnight.setPosition((j * 100) + 14, ((7 - i) * 100) + 9.5);
+                    whiteKnight.setPosition({static_cast<float>(j * 100 + 14), static_cast<float>((7 - i) * 100 + 9.5)});
                     window.draw(whiteKnight);
                 }
                 else if ((Game.Board.BlackKnights & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    blackKnight.setPosition((j * 100) + 14, ((7 - i) * 100) + 9.5);
+                    blackKnight.setPosition({static_cast<float>(j * 100 + 14), static_cast<float>((7 - i) * 100 + 9.5)});
                     window.draw(blackKnight);
                 } else if ((Game.Board.WhiteRooks & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    whiteRook.setPosition((j * 100) + 18.5, ((7 - i) * 100) + 9.5);
+                    whiteRook.setPosition({static_cast<float>(j * 100 + 18.5), static_cast<float>((7 - i) * 100 + 9.5)});
                     window.draw(whiteRook);
                 }
                 else if ((Game.Board.BlackRooks & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    blackRook.setPosition((j * 100) + 18.5, ((7 - i) * 100) + 9.5);
+                    blackRook.setPosition({static_cast<float>(j * 100 + 18.5), static_cast<float>((7 - i) * 100 + 9.5)});
                     window.draw(blackRook);
                 }
                 else if ((Game.Board.WhiteBishops & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    whiteBishop.setPosition((j * 100) + 9.5, ((7 - i) * 100) + 7.25);
+                    whiteBishop.setPosition({static_cast<float>(j * 100 + 9.5), static_cast<float>((7 - i) * 100 + 7.25)});
                     window.draw(whiteBishop);
                 }
                 else if ((Game.Board.BlackBishops & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    blackBishop.setPosition((j * 100) + 9.5, ((7 - i) * 100) + 7.25);
+                    blackBishop.setPosition({static_cast<float>(j * 100 + 9.5), static_cast<float>((7 - i) * 100 + 7.25)});
                     window.draw(blackBishop);
                 }
                 else if ((Game.Board.WhiteQueens & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    whiteQueen.setPosition((j * 100) + 9.5, ((7 - i) * 100) + 9.5);
+                    whiteQueen.setPosition({static_cast<float>(j * 100 + 9.5), static_cast<float>((7 - i) * 100 + 9.5)});
                     window.draw(whiteQueen);
                  }
                 else if ((Game.Board.BlackQueens & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    blackQueen.setPosition((j * 100) + 9.5, ((7 - i) * 100) + 9.5);
+                    blackQueen.setPosition({static_cast<float>(j * 100 + 9.5), static_cast<float>((7 - i) * 100 + 9.5)});
                     window.draw(blackQueen);
                 }
                 else if ((Game.Board.WhiteKing & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    whiteKing.setPosition((j * 100) + 5, ((7 - i) * 100) + 5);
+                    whiteKing.setPosition({static_cast<float>(j * 100 + 5), static_cast<float>((7 - i) * 100 + 5)});
                     window.draw(whiteKing);
                 }
                 else if ((Game.Board.BlackKing & (LOCATION::ZERO >> (j + (i * 8)))) != 0) {
-                    blackKing.setPosition((j * 100) + 5, ((7 - i) * 100) + 5);
+                    blackKing.setPosition({static_cast<float>(j * 100 + 5), static_cast<float>((7 - i) * 100 + 5)});
                     window.draw(blackKing);
                 }
 
                 // Render Highlights
 
                 if (((LOCATION::ZERO >> (j +(i * 8))) & lastMovePositions) != 0) {
-                    movedTile.setPosition(j * 100, (7 - i) * 100);
+                    movedTile.setPosition({static_cast<float>(j * 100), static_cast<float>((7 - i) * 100)});
                     window.draw(movedTile);
                 }
                 if (((LOCATION::ZERO >> (j +(i * 8))) & highlightedSquares) != 0) {
-                    selectTile.setPosition(j * 100, (7 - i) * 100);
+                    selectTile.setPosition({static_cast<float>(j * 100), static_cast<float>((7 - i) * 100)});
                     window.draw(selectTile);
                 }
             }
@@ -527,19 +526,19 @@ void loop(std::string fen) {
 
         switch (promoteTo) {
             case QUEEN:
-                whiteQueen.setPosition(814, 709.5);
+                whiteQueen.setPosition({814, 709.5});
                 window.draw(whiteQueen);
                 break;
             case KNIGHT:
-                whiteKnight.setPosition(814, 709.5);
+                whiteKnight.setPosition({814, 709.5});
                 window.draw(whiteKnight);
                 break;
             case BISHOP:
-                whiteBishop.setPosition(809.5, 707.25);
+                whiteBishop.setPosition({809.5, 707.25});
                 window.draw(whiteBishop);
                 break;
             case ROOK:
-                whiteRook.setPosition(818.5, 709.5);
+                whiteRook.setPosition({818.5, 709.5});
                 window.draw(whiteRook);
                 break;
             default:
